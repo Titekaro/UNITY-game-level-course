@@ -56,7 +56,7 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "UNITY game level exo.sln",
+    "dotnet.defaultSolution": "UNITY game level course.sln",
     "html.format.enable": true,
     "editor.autoClosingBrackets": "always",
     "editor.autoClosingDelete": "never",
