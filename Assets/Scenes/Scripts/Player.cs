@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour
      */
     [SerializeField] private Animator playerAnimator;
     private PlayerInputActions playerInputActions;
+    [SerializeField] private Interactable interactableTarget;
     [SerializeField] private float moveSpeed = 0.7f;
     [SerializeField] private float rotationSpeed = 20f;
     private bool isPlayerMoving = false; // Variable used to set walking animation if player is walking
@@ -19,6 +21,7 @@ public class Player : MonoBehaviour
     void Awake() {
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Move.Enable();
+        //playerInputActions.Player.Use.performed
     }
     void Start() {
 	}
@@ -90,12 +93,21 @@ public class Player : MonoBehaviour
          */
          // Send Raycast to detect interactions and get touched object.
          // If touched object has an interectable component, call his interact method.
+         // UPDATE: changed Raycast bu CapsuleCast because Raycast emits a ray only at y 0 which is problematic if player is not correctly aligned with object.
          if(Physics.Raycast(transform.position, playerDirection, out RaycastHit hitObj, 1f, LayerMask.GetMask("Interactable"))){
-            Debug.Log("touché: " + hitObj);
             if(hitObj.transform.TryGetComponent<Interactable>(out Interactable interactableObj)){
-                interactableObj.Interact();
+                interactableTarget = interactableObj;
+                Debug.Log(interactableTarget);
             }
-         }
+         } else {
+            interactableTarget = null;
+        }
+    }
+
+    void PlayerInteractionListener(InputAction.CallbackContext context) {
+        Debug.Log("interacté");
+        interactableTarget?.Interact();
+        playerAnimator.SetTrigger("is_interacting");
     }
 
 }
