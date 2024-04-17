@@ -65,5 +65,8 @@
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
     "unityToolbox.bracketsStyle": "same line, with space",
-    "editor.autoSurround": "never"
+    "editor.autoSurround": "never",
+    "dotnet.codeLens.enableReferencesCodeLens": false,
+    "dotnet.codeLens.enableTestsCodeLens": true,
+    "editor.codeLens": false
 }

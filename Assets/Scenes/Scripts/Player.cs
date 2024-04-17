@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,11 +21,13 @@ public class Player : MonoBehaviour
 
     void Awake() {
         playerInputActions = new PlayerInputActions();
-        playerInputActions.Player.Move.Enable();
-        //playerInputActions.Player.Use.performed
+        playerInputActions.Player.Enable();
+        playerInputActions.Player.Use.performed += PlayerInteractionListener; // Link event listener to the defined player action "use"
     }
+
     void Start() {
 	}
+
 	void Update() {
         PlayerMovement();
         PlayerInteraction();
@@ -67,7 +70,6 @@ public class Player : MonoBehaviour
         if(canPlayerMove) {
             // Check if player is moving
             isPlayerMoving = (playerCoords != Vector3.zero);
-
             // Set walking animation: "is_walking" refers to the name of the boolean set in the animation window for the walking animation.
             playerAnimator.SetBool("is_walking", isPlayerMoving);
             transform.position = transform.position + playerCoords * Time.deltaTime * moveSpeed; // Time.deltaTime pour uniformiser la vitesse de déplacement entre les différents supports d'exécution du jeu
@@ -94,10 +96,15 @@ public class Player : MonoBehaviour
          // Send Raycast to detect interactions and get touched object.
          // If touched object has an interectable component, call his interact method.
          // UPDATE: changed Raycast bu CapsuleCast because Raycast emits a ray only at y 0 which is problematic if player is not correctly aligned with object.
-         if(Physics.Raycast(transform.position, playerDirection, out RaycastHit hitObj, 1f, LayerMask.GetMask("Interactable"))){
+         if(Physics.Raycast(transform.position, playerDirection, out RaycastHit hitObj, 1f, LayerMask.GetMask("Usable"))){
+            Debug.Log(hitObj);
             if(hitObj.transform.TryGetComponent<Interactable>(out Interactable interactableObj)){
+                Debug.Log("interactable obj");
                 interactableTarget = interactableObj;
-                Debug.Log(interactableTarget);
+            } 
+            if(hitObj.transform.TryGetComponent<Collectable>(out Collectable collectableObj)){
+                Debug.Log("collectable obj");
+                collectableObj.CollectObject();
             }
          } else {
             interactableTarget = null;
@@ -105,7 +112,7 @@ public class Player : MonoBehaviour
     }
 
     void PlayerInteractionListener(InputAction.CallbackContext context) {
-        Debug.Log("interacté");
+        Debug.Log("listener interacté");
         interactableTarget?.Interact();
         playerAnimator.SetTrigger("is_interacting");
     }
