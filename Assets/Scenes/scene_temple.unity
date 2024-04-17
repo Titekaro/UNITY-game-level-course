@@ -1188,6 +1188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+  scoreTextField: {fileID: 1277854431}
 --- !u!4 &1357325603
 Transform:
   m_ObjectHideFlags: 0
@@ -1540,12 +1541,12 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1357325603}
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 1923671755}
   - {fileID: 1606218879}
   - {fileID: 48354515}
   - {fileID: 800312159}
-  - {fileID: 1357325603}
   - {fileID: 306491042}
   - {fileID: 762620686}
