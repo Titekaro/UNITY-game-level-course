@@ -1,3 +1,20 @@
+/*************************************************************
+ *************************************************************
+ 
+ - SCRIPT REFERENCE -
+
+ This script links the camera to the player displacement
+ from scratch without using the characterController system.
+
+ This script has to be placed on the main camera and works with 
+ the "(from scratch)player" script that has to be referenced as 
+ the "target" variable of this script.
+
+ This script got replaced with the character script.
+
+ *************************************************************
+*************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
