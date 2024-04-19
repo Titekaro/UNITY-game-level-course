@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028414, g: 0.2257146, b: 0.30692405, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028373, g: 0.22571404, b: 0.30692264, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -312,7 +312,6 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
-  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -438,20 +437,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!114 &330585548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 814958814c5ce7648bd171bc06d7f131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1606218878}
-  cameraDistance: 2
 --- !u!1 &361551286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,8 +1410,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1606218879}
-  - component: {fileID: 1606218880}
   - component: {fileID: 1606218881}
+  - component: {fileID: 1606218882}
   m_Layer: 0
   m_Name: Penguin (empty)
   m_TagString: Untagged
@@ -1450,24 +1435,6 @@ Transform:
   - {fileID: 485788420}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1606218880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606218878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39e3e89bb34f45243a4fa759c0673ae7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerAnimator: {fileID: 485788421}
-  interactableTarget: {fileID: 0}
-  moveSpeed: 0.35
-  rotationSpeed: 10
-  jumpSpeed: 2
-  playerMass: 1
 --- !u!143 &1606218881
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1494,6 +1461,22 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1606218882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606218878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6af180a610b9be4aaaff3359079f54c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  jumpSpeed: 5
+  characterMass: 1
+  interactableTarget: {fileID: 0}
 --- !u!1001 &1753311603
 PrefabInstance:
   m_ObjectHideFlags: 0

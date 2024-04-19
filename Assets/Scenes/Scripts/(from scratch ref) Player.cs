@@ -1,3 +1,20 @@
+/*************************************************************
+ *************************************************************
+ 
+ - SCRIPT REFERENCE -
+
+ This is a player control script that manages player movements
+ from scratch without using the characterController system.
+
+ This script has to be placed on the empty player and works 
+ with a box collider set on the empty player & the 
+ "(from scratch ref)cameraToFollowPlayer" script.
+
+ This script got replaced with the character script.
+
+ *************************************************************
+*************************************************************/
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
