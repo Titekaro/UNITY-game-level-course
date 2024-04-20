@@ -18,12 +18,12 @@ public class Character : MonoBehaviour
     private Camera characterCamera;
     private float cameraHeight = 2;
     private int cameraDistance = 2;
-    [SerializeField] private int moveSpeed = 5;
-    [SerializeField] private int jumpSpeed = 5;
-    [SerializeField] private int rotationSpeed = 20;
-    [SerializeField] private int characterMass = 1;
     private Vector3 velocity;
     private Vector3 gravity;
+    [SerializeField] private int moveSpeed = 5;
+    [SerializeField] private int jumpSpeed = 5;
+    [SerializeField] private int rotationSpeed = 2;
+    [SerializeField] private int characterMass = 1;
     [SerializeField] private Interactable interactableTarget;
 
     void Awake() {
@@ -41,14 +41,14 @@ public class Character : MonoBehaviour
 	}
 
 	void Update() {
-        CharacterMovement();
         CharacterGravity();
+        CharacterMovement();
         PlayerInteraction();
     }
 
     void CharacterGravity() {
         gravity = Physics.gravity * characterMass * Time.deltaTime;
-        velocity.y = characterController.isGrounded? -1f : velocity.y + gravity.y;
+        velocity.y = characterController.isGrounded ? -1 : velocity.y + gravity.y;
     }
 
     void CharacterMovement() {
@@ -65,13 +65,6 @@ public class Character : MonoBehaviour
         Vector3 moveCoords = new Vector3(x, 0, y);
         moveCoords = Vector3.ClampMagnitude(moveCoords, 1f); // MaxLength
 
-        // Move the character according to the moveCoords by using the Move() property of characterController
-        characterController.Move((moveCoords * moveSpeed + velocity) * Time.deltaTime);
-
-        // Make character rotate according to the move coords
-        transform.forward = Vector3.Slerp(transform.forward, moveCoords, Time.deltaTime * rotationSpeed);
-
-
         /* Input - KeyCode maps to physical keys
          * Doc:
          * https://docs.unity3d.com/ScriptReference/Input.html
@@ -81,6 +74,11 @@ public class Character : MonoBehaviour
             velocity.y += jumpSpeed; // Add jump speed to vector
         }
 
+        // Move the character according to the moveCoords by using the Move() property of characterController
+        characterController.Move((moveCoords * moveSpeed + velocity) * Time.deltaTime);
+
+        // Make character rotate according to the move coords
+        transform.forward = Vector3.Slerp(transform.forward, moveCoords, Time.deltaTime * rotationSpeed);
     }
 
     void ViewControl() {
