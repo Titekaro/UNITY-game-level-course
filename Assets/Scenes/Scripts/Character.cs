@@ -1,11 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Rendering.LookDev;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 public class Character : MonoBehaviour
@@ -20,18 +18,21 @@ public class Character : MonoBehaviour
     private int cameraDistance = 2;
     private Vector3 velocity;
     private Vector3 gravity;
+    private float fallLimit = -50f;
     [SerializeField] private int moveSpeed = 5;
     [SerializeField] private int jumpSpeed = 5;
     [SerializeField] private int rotationSpeed = 2;
     [SerializeField] private int characterMass = 1;
     [SerializeField] private Interactable interactableTarget;
+    private (Vector3, quaternion) characterInitialPosition;
 
     void Awake() {
         characterController = GetComponent<CharacterController>(); // Set up CharacterController
         characterCamera = GameObject.Find("Main Camera").GetComponent<Camera>(); // Set the main camera of the scene as the characterCamera
         // Set up the camera position at right distance of character position
         characterCamera.transform.position = new Vector3(characterCamera.transform.position.x, characterCamera.transform.position.y + cameraHeight, characterCamera.transform.position.z - cameraDistance);
-
+        
+        characterInitialPosition = (transform.position, transform.rotation);
         //playerInputActions = new PlayerInputActions();
         //playerInputActions.Player.Enable();
         //playerInputActions.Player.Use.performed += PlayerInteractionListener; // Link event listener to the defined player action "use"
@@ -44,6 +45,7 @@ public class Character : MonoBehaviour
         CharacterGravity();
         CharacterMovement();
         PlayerInteraction();
+        CheckCharacterPosition();
     }
 
     void CharacterGravity() {
@@ -79,6 +81,23 @@ public class Character : MonoBehaviour
 
         // Make character rotate according to the move coords
         transform.forward = Vector3.Slerp(transform.forward, moveCoords, Time.deltaTime * rotationSpeed);
+    }
+
+    void ResetCharacterPosition(Vector3 position, Quaternion rotation) {
+        transform.position = position;
+        transform.rotation = rotation;
+        Physics.SyncTransforms();
+        velocity = Vector3.zero;
+    }
+
+    void CheckCharacterPosition() {
+        Debug.Log(fallLimit);
+        Debug.Log(transform.position.y);
+
+         if(transform.position.y < fallLimit) {
+            (transform.position, transform.rotation) = characterInitialPosition;
+            ResetCharacterPosition(transform.position, transform.rotation);
+        }
     }
 
     void ViewControl() {
