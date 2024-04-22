@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028414, g: 0.2257146, b: 0.30692405, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028373, g: 0.22571404, b: 0.30692264, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -649,7 +649,7 @@ GameObject:
   - component: {fileID: 485788420}
   - component: {fileID: 485788421}
   m_Layer: 0
-  m_Name: Visuals (empty)
+  m_Name: Visual (empty)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1505,6 +1505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6af180a610b9be4aaaff3359079f54c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fallLimit: -50
   moveSpeed: 5
   jumpSpeed: 5
   rotationSpeed: 20

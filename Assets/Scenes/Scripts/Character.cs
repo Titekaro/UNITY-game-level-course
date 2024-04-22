@@ -13,21 +13,24 @@ public class Character : MonoBehaviour
      * https://docs.unity3d.com/ScriptReference/CharacterController.html
      */
     private CharacterController characterController;
+    private Animator characterAnimator;
     private Camera characterCamera;
     private float cameraHeight = 2;
     private int cameraDistance = 2;
     private Vector3 velocity;
     private Vector3 gravity;
-    private float fallLimit = -50f;
+    [SerializeField] private int fallLimit = -50;
     [SerializeField] private int moveSpeed = 5;
     [SerializeField] private int jumpSpeed = 5;
-    [SerializeField] private int rotationSpeed = 2;
+    [SerializeField] private int rotationSpeed = 2; 
     [SerializeField] private int characterMass = 1;
     [SerializeField] private Interactable interactableTarget;
     private (Vector3, quaternion) characterInitialPosition;
+    private bool isCharacterWalking = false;
 
     void Awake() {
         characterController = GetComponent<CharacterController>(); // Set up CharacterController
+        characterAnimator = GameObject.Find("Visual (empty)").GetComponent<Animator>();
         characterCamera = GameObject.Find("Main Camera").GetComponent<Camera>(); // Set the main camera of the scene as the characterCamera
         // Set up the camera position at right distance of character position
         characterCamera.transform.position = new Vector3(characterCamera.transform.position.x, characterCamera.transform.position.y + cameraHeight, characterCamera.transform.position.z - cameraDistance);
@@ -67,6 +70,14 @@ public class Character : MonoBehaviour
         Vector3 moveCoords = new Vector3(x, 0, y);
         moveCoords = Vector3.ClampMagnitude(moveCoords, 1f); // MaxLength
 
+        // Launch walking animation if character is moving
+        if(moveCoords != new Vector3(0,0,0)) {
+            isCharacterWalking = true;
+        } else {
+            isCharacterWalking = false;
+        }
+        characterAnimator.SetBool("is_walking", isCharacterWalking);
+
         /* Input - KeyCode maps to physical keys
          * Doc:
          * https://docs.unity3d.com/ScriptReference/Input.html
@@ -81,6 +92,7 @@ public class Character : MonoBehaviour
 
         // Make character rotate according to the move coords
         transform.forward = Vector3.Slerp(transform.forward, moveCoords, Time.deltaTime * rotationSpeed);
+
     }
 
     void ResetCharacterPosition(Vector3 position, Quaternion rotation) {
