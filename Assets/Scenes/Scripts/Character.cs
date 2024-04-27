@@ -28,17 +28,24 @@ public class Character : MonoBehaviour
     private (Vector3, quaternion) characterInitialPosition;
     private bool isCharacterWalking = false;
 
+    private PlayerInput characterInput;
+    private InputAction moveAction;
+    private InputAction jumpAction;
+    private InputAction useAction;
+
     void Awake() {
         characterController = GetComponent<CharacterController>(); // Set up CharacterController
         characterAnimator = GameObject.Find("Visual (empty)").GetComponent<Animator>();
         characterCamera = GameObject.Find("Main Camera").GetComponent<Camera>(); // Set the main camera of the scene as the characterCamera
         // Set up the camera position at right distance of character position
         characterCamera.transform.position = new Vector3(characterCamera.transform.position.x, characterCamera.transform.position.y + cameraHeight, characterCamera.transform.position.z - cameraDistance);
-        
         characterInitialPosition = (transform.position, transform.rotation);
-        //playerInputActions = new PlayerInputActions();
-        //playerInputActions.Player.Enable();
-        //playerInputActions.Player.Use.performed += PlayerInteractionListener; // Link event listener to the defined player action "use"
+
+        // Get the character inputs
+        characterInput = GetComponent<PlayerInput>();
+        moveAction = characterInput.actions["Move"];
+        jumpAction = characterInput.actions["Jump"];
+        useAction = characterInput.actions["Use"];
     }
 
     void Start() {
@@ -47,8 +54,10 @@ public class Character : MonoBehaviour
 	void Update() {
         CharacterGravity();
         CharacterMovement();
-        PlayerInteraction();
         CheckCharacterPosition();
+
+        CharacterInteraction();
+        CharacterInteractionListener();
     }
 
     void CharacterGravity() {
@@ -58,8 +67,7 @@ public class Character : MonoBehaviour
 
     void CharacterMovement() {
         // Set up the character displacement according to axis values returned by the keyboard
-        float x = Input.GetAxis("Horizontal"); // Get the value of x axis
-        float y = Input.GetAxis("Vertical"); // Get the value of y axis
+        Vector2 axisInput = moveAction.ReadValue<Vector2>();
 
         /* Vector3.ClampMagnitude - Returns a copy of vector with its magnitude clamped to maxLength.
          * Doc:
@@ -67,8 +75,8 @@ public class Character : MonoBehaviour
          * 
          */
         // Build a Vector3 with x, y, z values that will be the player coords at move
-        Vector3 moveCoords = new Vector3(x, 0, y);
-        moveCoords = Vector3.ClampMagnitude(moveCoords, 1f); // MaxLength
+        Vector3 moveCoords = new Vector3(axisInput.x, 0, axisInput.y);
+        //moveCoords = Vector3.ClampMagnitude(moveCoords, 1f); // MaxLength
 
         // Launch walking animation if character is moving
         if(moveCoords != new Vector3(0,0,0)) {
@@ -82,8 +90,9 @@ public class Character : MonoBehaviour
          * Doc:
          * https://docs.unity3d.com/ScriptReference/Input.html
          */
-         // Detect the jump movement set up in Edit > Project Settings > Input Manager > Jump
-        if(Input.GetButtonDown("Jump") && characterController.isGrounded){
+        // With Input.GetButtonDown("Jump"), detect the jump movement set up in Edit > Project Settings > Input Manager > Jump
+        float jumpInput = jumpAction.ReadValue<float>();
+        if(jumpInput > 0 && characterController.isGrounded){
             velocity.y += jumpSpeed; // Add jump speed to vector
         }
 
@@ -95,21 +104,18 @@ public class Character : MonoBehaviour
 
     }
 
+    void CheckCharacterPosition() {
+         if(transform.position.y < fallLimit) {
+            (transform.position, transform.rotation) = characterInitialPosition;
+            ResetCharacterPosition(transform.position, transform.rotation);
+        }
+    }
+
     void ResetCharacterPosition(Vector3 position, Quaternion rotation) {
         transform.position = position;
         transform.rotation = rotation;
         Physics.SyncTransforms();
         velocity = Vector3.zero;
-    }
-
-    void CheckCharacterPosition() {
-        Debug.Log(fallLimit);
-        Debug.Log(transform.position.y);
-
-         if(transform.position.y < fallLimit) {
-            (transform.position, transform.rotation) = characterInitialPosition;
-            ResetCharacterPosition(transform.position, transform.rotation);
-        }
     }
 
     void ViewControl() {
@@ -127,7 +133,7 @@ public class Character : MonoBehaviour
         //transform.localRotation = Quaternion.Euler(0.0f, fieldOfView.x * 3, 0.0f); // Rotation du personnage (horizontale)
     }
 
-    void PlayerInteraction() {
+    void CharacterInteraction() {
         // Get player orientation
         Vector3 playerDirection = transform.forward;
 
@@ -155,10 +161,14 @@ public class Character : MonoBehaviour
         }
     }
 
-    void PlayerInteractionListener(InputAction.CallbackContext context) {
-        Debug.Log("listener interacté");
-        interactableTarget?.Interact();
-        //playerAnimator.SetTrigger("is_interacting");
+    void CharacterInteractionListener() {
+        float useInput = useAction.ReadValue<float>();
+        
+        if(useInput > 0 && interactableTarget) {
+            Debug.Log("listener interacté");
+            interactableTarget.Interact();
+            //playerAnimator.SetTrigger("is_interacting");
+        }
     }
 
 }
