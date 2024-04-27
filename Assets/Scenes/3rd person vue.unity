@@ -431,12 +431,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &361551286
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,6 +638,12 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &431251471 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7084915735226376378, guid: 2bc62abd6e2bb104383181be22487322,
+    type: 3}
+  m_PrefabInstance: {fileID: 3791704326264651571}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &485788419
 GameObject:
   m_ObjectHideFlags: 0
@@ -1443,6 +1449,7 @@ GameObject:
   - component: {fileID: 1606218879}
   - component: {fileID: 1606218881}
   - component: {fileID: 1606218882}
+  - component: {fileID: 1606218883}
   m_Layer: 0
   m_Name: Penguin (empty)
   m_TagString: Untagged
@@ -1511,6 +1518,37 @@ MonoBehaviour:
   rotationSpeed: 20
   characterMass: 1
   interactableTarget: {fileID: 0}
+--- !u!114 &1606218883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606218878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ea4732bccc2be3d42a6124a78cd7f18f,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &1753311603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1668,6 +1706,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3791704326264651571}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1891350847
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431251471}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.4292326, y: 3.1120636, z: 4.052704}
+  m_Center: {x: -3.9380279, y: 1.0560318, z: 19.050724}
 --- !u!1 &1920362379
 GameObject:
   m_ObjectHideFlags: 0
@@ -1930,7 +1989,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7084915735226376378, guid: 2bc62abd6e2bb104383181be22487322,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1891350847}
   m_SourcePrefab: {fileID: 100100000, guid: 2bc62abd6e2bb104383181be22487322, type: 3}
 --- !u!1001 &4292177700988229459
 PrefabInstance:
