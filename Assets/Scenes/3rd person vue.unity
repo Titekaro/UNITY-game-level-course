@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 319245813}
   - component: {fileID: 319245812}
   - component: {fileID: 319245811}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2001,7 +2001,7 @@ PrefabInstance:
     - target: {fileID: 1158722435479297500, guid: f801b8899aec41045b840af33854686f,
         type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1940610199261302444, guid: f801b8899aec41045b840af33854686f,
         type: 3}

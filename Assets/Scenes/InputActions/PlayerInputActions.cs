@@ -179,6 +179,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""7985fdc7-a129-453b-98e7-93f653c95757"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""620443ad-e82d-4fb4-b076-6c4906d6008c"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
