@@ -6,6 +6,11 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     [SerializeField] private string interactableObjectType;
+    private Animator chestAnimator;
+
+    void Awake() {
+        chestAnimator = GameObject.Find("Visual").GetComponent<Animator>();
+    }
 
     void Start(){
         
@@ -20,12 +25,17 @@ public class Interactable : MonoBehaviour
 
         switch(interactableObjectType) {
             case "chest":
-                Debug.Log("yeah! You found a chest !");
+                OpenChest();
                 break;
             case "pedestal":
                 Debug.Log("it's the pedestal");
                 break;
             
         }
+    }
+
+    void OpenChest(){
+        Debug.Log("yeah! You found a chest !");
+        chestAnimator.SetBool("isOpen", true);
     }
 }

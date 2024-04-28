@@ -15,14 +15,14 @@ public class Character : MonoBehaviour
     private CharacterController characterController;
     private Animator characterAnimator;
     private Camera characterCamera;
-    private float cameraHeight = 2;
+    private float cameraHeight = 1.5f;
     private int cameraDistance = 2;
     private Vector3 velocity;
     private Vector3 gravity;
     [SerializeField] private int fallLimit = -50;
     [SerializeField] private int moveSpeed = 5;
     [SerializeField] private int jumpSpeed = 5;
-    [SerializeField] private int rotationSpeed = 2; 
+    [SerializeField] private int rotationSpeed = 10; 
     [SerializeField] private int characterMass = 1;
     [SerializeField] private Interactable interactableTarget;
     private (Vector3, quaternion) characterInitialPosition;
