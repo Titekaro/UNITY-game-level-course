@@ -150,7 +150,6 @@ public class Character : MonoBehaviour
          // If touched object has an interectable component, call his interact method.
          // @TODO: change Raycast bu CapsuleCast because Raycast emits a ray only at y 0 which is problematic if player is not correctly aligned with object.
          if(Physics.Raycast(transform.position, playerDirection, out RaycastHit hitObj, 1f, LayerMask.GetMask("Usable"))){
-            Debug.Log(hitObj);
             if(hitObj.transform.TryGetComponent<Interactable>(out Interactable interactableObj)){
                 Debug.Log("interactable obj");
                 interactableTarget = interactableObj;
@@ -168,7 +167,7 @@ public class Character : MonoBehaviour
 
     void OnInteractInput() {
         float interactInput = interactAction.ReadValue<float>();
-        
+        Debug.Log(interactAction);
         if(interactInput > 0 && interactableTarget) {
             Debug.Log("interacté");
             interactableTarget.Interact();
