@@ -19,14 +19,16 @@ public class Character : MonoBehaviour
     private int cameraDistance = 2;
     private Vector3 velocity;
     private Vector3 gravity;
+    private (Vector3, quaternion) characterInitialPosition;
+    private bool isCharacterWalking = false;
+    private GameManager gameManager;
+
     [SerializeField] private int fallLimit = -50;
     [SerializeField] private int moveSpeed = 5;
     [SerializeField] private int jumpSpeed = 5;
     [SerializeField] private int rotationSpeed = 10; 
     [SerializeField] private int characterMass = 1;
     [SerializeField] private Interactable interactableTarget;
-    private (Vector3, quaternion) characterInitialPosition;
-    private bool isCharacterWalking = false;
 
     private PlayerInput characterInput;
     private InputAction moveAction;
@@ -36,6 +38,7 @@ public class Character : MonoBehaviour
     void Awake() {
         characterController = GetComponent<CharacterController>(); // Set up CharacterController
         characterAnimator = GameObject.Find("Visual (empty)").GetComponent<Animator>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         characterCamera = GameObject.Find("Main Camera").GetComponent<Camera>(); // Set the main camera of the scene as the characterCamera
         // Set up the camera position at right distance of character position
         characterCamera.transform.position = new Vector3(characterCamera.transform.position.x, characterCamera.transform.position.y + cameraHeight, characterCamera.transform.position.z - cameraDistance);
@@ -106,6 +109,7 @@ public class Character : MonoBehaviour
     void CheckCharacterPosition() {
          if(transform.position.y < fallLimit) {
             (transform.position, transform.rotation) = characterInitialPosition;
+            gameManager.UpdateLife();
             ResetCharacterPosition(transform.position, transform.rotation);
         }
     }
