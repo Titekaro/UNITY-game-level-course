@@ -167,7 +167,7 @@ public class Character : MonoBehaviour
 
     void OnInteractInput() {
         float interactInput = interactAction.ReadValue<float>();
-        Debug.Log(interactAction);
+        //Debug.Log(interactAction);
         if(interactInput > 0 && interactableTarget) {
             Debug.Log("interacté");
             interactableTarget.Interact();
