@@ -151,7 +151,7 @@ public class Character : MonoBehaviour
          // @TODO: change Raycast bu CapsuleCast because Raycast emits a ray only at y 0 which is problematic if player is not correctly aligned with object.
          if(Physics.Raycast(transform.position, playerDirection, out RaycastHit hitObj, 1f, LayerMask.GetMask("Usable"))){
             if(hitObj.transform.TryGetComponent<Interactable>(out Interactable interactableObj)){
-                Debug.Log("interactable obj");
+                //Debug.Log("interactable obj");
                 interactableTarget = interactableObj;
             } 
             if(hitObj.transform.TryGetComponent<Collectable>(out Collectable collectableObj)){
@@ -167,9 +167,9 @@ public class Character : MonoBehaviour
 
     void OnInteractInput() {
         float interactInput = interactAction.ReadValue<float>();
-        Debug.Log(interactAction);
+        //Debug.Log(interactAction);
         if(interactInput > 0 && interactableTarget) {
-            Debug.Log("interacté");
+            //Debug.Log("interacté");
             interactableTarget.Interact();
             //playerAnimator.SetTrigger("is_interacting");
         }
