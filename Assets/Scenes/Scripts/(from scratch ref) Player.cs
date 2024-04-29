@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     void Awake() {
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
-        playerInputActions.Player.Use.performed += PlayerInteractionListener; // Link event listener to the defined player action "use"
+        playerInputActions.Player.Interact.performed += PlayerInteractionListener; // Link event listener to the defined player action "use"
     }
 
     void Start() {
