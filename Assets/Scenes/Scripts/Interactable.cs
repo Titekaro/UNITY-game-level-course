@@ -39,8 +39,9 @@ public class Interactable : MonoBehaviour
 
     public void OpenObject(){
         Debug.Log("yeah! You found a chest !");
-        if(gameObject.GetComponent<AudioSource>() != null) {
-            gameObject.GetComponent<AudioSource>().Play();
+        Debug.Log(transform);
+        if(transform.GetComponent<AudioSource>() != null) {
+            transform.GetComponent<AudioSource>().Play();
         }
         if (objectAnimator != null) {
             objectAnimator.SetBool("isOpen", true);   

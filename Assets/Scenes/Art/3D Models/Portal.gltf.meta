@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b571d815c4997b547a61abe2df20d9e2
+guid: 8d39860589ab46b469d63b15683d503d
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -24,4 +24,14 @@ ScriptedImporter:
     lightIntensityFactor: 1
     sceneObjectCreation: 2
   assetDependencies: []
-  reportItems: []
+  reportItems:
+  - type: 2
+    code: 20
+    messages:
+    - KHR_materials_ior
+  - type: 2
+    code: 19
+    messages: []
+  - type: 2
+    code: 31
+    messages: []
