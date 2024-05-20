@@ -6,7 +6,7 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     [SerializeField] private string interactableObjectType;
-    [SerializeField] private Animator objectAnimator;
+    private Animator objectAnimator;
 
     void Awake() {
         objectAnimator = transform.Find("Visual").GetComponent<Animator>();
@@ -39,13 +39,15 @@ public class Interactable : MonoBehaviour
 
     public void OpenObject(){
         Debug.Log("yeah! You found a chest !");
-        Debug.Log(transform);
-        if(transform.GetComponent<AudioSource>() != null) {
-            transform.GetComponent<AudioSource>().Play();
+
+        if (objectAnimator.GetBool("isOpen") == false && objectAnimator != null) {
+            objectAnimator.SetBool("isOpen", true); 
+
+            if(transform.GetComponent<AudioSource>() != null) {
+                transform.GetComponent<AudioSource>().Play();
+            }
         }
-        if (objectAnimator != null) {
-            objectAnimator.SetBool("isOpen", true);   
-        }
+
     }
 
 }
