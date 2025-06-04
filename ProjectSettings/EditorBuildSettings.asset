@@ -6,11 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Art/3rd person view.unity
+    path: Assets/Scenes/3rd person view.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Art/XR view.unity
+    path: Assets/Scenes/MainMenu.unity
+    guid: 64bf71b2b262e074ca2babd6811badfc
+  - enabled: 1
+    path: Assets/Scenes/Level_01.unity
     guid: d3122c89bc454f04087e8e17604792b3
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 8fee6106319608746ac3b8c8f938e3b6
+  - enabled: 0
+    path: Assets/Samples/XR Interaction Toolkit/2.5.4/Starter Assets/DemoScene.unity
+    guid: 319dafa5c80f29f428dc1e0d03f04177
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 2a669bcd0bf606f48a8a89b65edb3056,
       type: 2}
